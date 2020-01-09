@@ -1,0 +1,9 @@
+c:\users\b8014689\source\repos\Document Management System\Document Management System\obj\Debug\Document Management System.csprojAssemblyReference.cache
+c:\users\b8014689\source\repos\Document Management System\Document Management System\obj\Debug\Document_Management_System.Properties.Resources.resources
+c:\users\b8014689\source\repos\Document Management System\Document Management System\obj\Debug\Document Management System.csproj.GenerateResource.cache
+c:\users\b8014689\source\repos\Document Management System\Document Management System\obj\Debug\Document Management System.csproj.CoreCompileInputs.cache
+c:\users\b8014689\source\repos\Document Management System\Document Management System\bin\Debug\Document Management System.exe.config
+c:\users\b8014689\source\repos\Document Management System\Document Management System\bin\Debug\Document Management System.exe
+c:\users\b8014689\source\repos\Document Management System\Document Management System\bin\Debug\Document Management System.pdb
+c:\users\b8014689\source\repos\Document Management System\Document Management System\obj\Debug\Document Management System.exe
+c:\users\b8014689\source\repos\Document Management System\Document Management System\obj\Debug\Document Management System.pdb
