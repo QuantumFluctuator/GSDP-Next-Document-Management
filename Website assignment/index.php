@@ -1,6 +1,13 @@
 <!doctype html>
 <html>
+    <?php
+    $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
 
+    if (!$connect) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        die(mysqli_error());
+    }
+    ?>
     <head>
         <meta charset="utf-8">
         <title>NEXT Document Manager</title>
@@ -28,15 +35,17 @@
             $searchq = preg_replace("#[^0-9 a-z . _ ]#i","",$searchq);
 
             //SQL query, comparing search string to column data
-            $query = mysql_query("SELECT * FROM documents WHERE ID LIKE '%$searchq%' OR Name LIKE '%$searchq%' OR Location LIKE '%$searchq%' Or LastModified LIKE '%$searchq%' Or Rating LIKE '%$searchq%' Or Author LIKE '%$searchq%'") or die ("Could not search.");
+            $query = mysqli_query($connect, "SELECT * FROM documents WHERE Name LIKE '%$searchq%'"); // ID LIKE '%$searchq%' OR Name LIKE '%$searchq%' OR Location LIKE '%$searchq%' OR LastModified LIKE '%$searchq%' OR Rating LIKE '%$searchq%' OR Author LIKE '%$searchq%'");// or die ("Could not search.");
 
+            $count = mysqli_num_rows($query);
+            
             //if no matches to the search
             if($count == 0){
                 $output = 'There were no results for your search.';
 
             }else{
                 //While loop to collect relevant information from the rows
-                while($row = mysql_fetch_array($query)){
+                while($row = mysqli_fetch_assoc($query)){
                     $docID = $row['ID'];
                     $docName = $row['Name'];
                     $loc = $row['Location'];
@@ -45,10 +54,8 @@
                     $author = $row['Author'];
 
                     $output .= '<div>'.$docID.' '.$docName.' '.$loc.' '.$moddate.' '.$rated.' '.$author.'</div>';
-
                 }
             }   
-        }
         }
         ?>
 
@@ -60,14 +67,11 @@
 
 
         <?php // outputting search results on vutton click
-        print("$output");?>
-
+        print("$output");
+        ?>
         </div>
-
-
-
-
-            <hr size="6" width="75%" align="left" color="black">
+            
+            <hr size="6" width="100%" align="center" color="black">
 
             <table>
                 <thead>
@@ -82,13 +86,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                    $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
-                    if (!$connect) {
-                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                        die(mysqli_error());
-                    }
-                    
+                    <?php
                     $results = mysqli_query($connect, "SELECT * FROM documents");
                     
                     if (!$results) {
@@ -107,7 +105,6 @@
                             <td><?php echo $row['Author']?></td>
                             <td></td>
                         </tr>
-
                     <?php
                     }
                     ?>
