@@ -19,6 +19,54 @@
             <!--Button to take user to login form !-->
             <button type="submit" onclick="location.href='login.php' ">Sign in</button>
 
+
+        <?php
+        //Collect
+        if(isset($_POST['search'])) {
+            $searchq = $_POST['search'];
+            //Setting allowed characters, only numbers, letters and a small set of punctuation
+            $searchq = preg_replace("#[^0-9 a-z . _ ]#i","",$searchq);
+
+            //SQL query, comparing search string to column data
+            $query = mysql_query("SELECT * FROM documents WHERE ID LIKE '%$searchq%' OR Name LIKE '%$searchq%' OR Location LIKE '%$searchq%' Or LastModified LIKE '%$searchq%' Or Rating LIKE '%$searchq%' Or Author LIKE '%$searchq%'") or die ("Could not search.");
+
+            //if no matches to the search
+            if($count == 0){
+                $output = 'There were no results for your search.';
+
+            }else{
+                //While loop to collect relevant information from the rows
+                while($row = mysql_fetch_array($query)){
+                    $docID = $row['ID'];
+                    $docName = $row['Name'];
+                    $loc = $row['Location'];
+                    $moddate = $row['LastModified'];
+                    $rated = $row['Rating'];
+                    $author = $row['Author'];
+
+                    $output .= '<div>'.$docID.' '.$docName.' '.$loc.' '.$moddate.' '.$rated.' '.$author.'</div>';
+
+                }
+            }   
+        }
+        }
+        ?>
+
+        <div class="topnav">
+            <form action="index.php" method="post">
+                <input type="text" name="search" placeholder="Search" />
+                <input type="submit" value="Go" />
+            </form>
+
+
+        <?php // outputting search results on vutton click
+        print("$output");?>
+
+        </div>
+
+
+
+
             <hr size="6" width="75%" align="left" color="black">
 
             <table>
