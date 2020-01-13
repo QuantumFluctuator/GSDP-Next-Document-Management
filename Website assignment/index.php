@@ -33,12 +33,12 @@
                 </thead>
                 <tbody>
                 <?php
-                    $connect = mysql_connect("127.0.0.1","root", "nextTeam2");
+                    $connect = mysqli_connect("localhost","next", "nextTeam2");
                     if (!$connect) {
                         die(mysql_error());
                     }
-                    mysql_select_db("apploymentdevs");
-                    $results = mysql_query("SELECT * FROM demo");
+                    mysql_select_db("nextDocumentManager");
+                    $results = mysql_query("SELECT * FROM documents");
                     while($row = mysql_fetch_array($results)) {
                     ?>
                         <tr>
