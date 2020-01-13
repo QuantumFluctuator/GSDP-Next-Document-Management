@@ -1,9 +1,0 @@
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\bin\Debug\NEXT DBS.dacpac
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\bin\Debug\NEXT_DBS.dll
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\bin\Debug\NEXT_DBS.pdb
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\obj\Debug\Model.xml
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\obj\Debug\refactor.xml
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\obj\Debug\postdeploy.sql
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\obj\Debug\predeploy.sql
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\obj\Debug\NEXT_DBS.dll
-\\studenthome.hallam.shu.ac.uk\STUDENTHOME5\0\b7009360\MyWork\Modules\Second Year\GDSP\NEXT DBS\NEXT DBS\obj\Debug\NEXT_DBS.pdb
