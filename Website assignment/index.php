@@ -19,14 +19,16 @@
             <!--Button to take user to login form !-->
             <button type="submit" onclick="location.href='login.php' ">Sign in</button>
 
-            <hr size="6" width="50%" align="left" color="white">
+            <hr size="6" width="75%" align="left" color="black">
 
             <table>
                 <thead>
                     <tr>
                         <td>Document ID</td>
+                        <td>File Location</td>
                         <td>Document Name</td>
                         <td>Last Edited</td>
+                        <td>Rating</td>
                         <td>Author</td>
                         <td>Tags</td>
                     </tr>
@@ -50,8 +52,10 @@
                     ?>
                         <tr>
                             <td><?php echo $row['ID']?></td>
-                            <td><?php echo $row['Name']?></td>
+                            <td><?php echo $row['Location']?></td>
+                            <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_replace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
                             <td><?php echo $row['LastModified']?></td>
+                            <td><?php echo $row['Rating']?></td>
                             <td><?php echo $row['Author']?></td>
                             <td></td>
                         </tr>
