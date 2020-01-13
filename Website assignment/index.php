@@ -24,8 +24,8 @@
             <table>
                 <thead>
                     <tr>
-                        <td>DocId</td>
-                        <td>DocName</td>
+                        <td>Document ID</td>
+                        <td>Document Name</td>
                         <td>Last Edited</td>
                         <td>Author</td>
                         <td>Tags</td>
@@ -39,11 +39,21 @@
                         die(mysqli_error());
                     }
                     $results = mysqli_query("SELECT * FROM documents");
-                    while($row = mysqli_fetch_array($results)) {
+                    
+                    if (!$results) {
+                        $message  = 'Invalid query: ' . mysql_error() . "\n";
+                        $message .= 'Whole query: ' . $query;
+                        die($message);
+                    }
+                    
+                    while($row = mysqli_fetch_assoc($results)) {
                     ?>
                         <tr>
                             <td><?php echo $row['ID']?></td>
                             <td><?php echo $row['Name']?></td>
+                            <td><?php echo $row['LastModified']?></td>
+                            <td><?php echo $row['Author']?></td>
+                            <td></td>
                         </tr>
 
                     <?php
