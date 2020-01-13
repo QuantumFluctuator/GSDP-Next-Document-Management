@@ -1,13 +1,6 @@
 <!doctype html>
 <html>
-    <?php
-    $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
 
-    if (!$connect) {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        die(mysqli_error());
-    }
-    ?>
     <head>
         <meta charset="utf-8">
         <title>NEXT Document Manager</title>
@@ -25,18 +18,7 @@
 
             <!--Button to take user to login form !-->
             <button type="submit" onclick="location.href='login.php' ">Sign in</button>
-            
-            <div class="topnav">
-                <form action="index.php" method="post">
-                    <input type="text" name="search" placeholder="Search" />
-                    <input type="submit" value="Go" />
-                </form>
 
-
-                <?php // outputting search results on vutton click
-                print("$output");
-                ?>
-            </div>
 
         <?php
         //Collect
@@ -46,63 +28,53 @@
             $searchq = preg_replace("#[^0-9 a-z . _ ]#i","",$searchq);
 
             //SQL query, comparing search string to column data
-            $query = mysqli_query($connect, "SELECT * FROM documents WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (Name LIKE '%$searchq%')"); // ID LIKE '%$searchq%' OR Name LIKE '%$searchq%' OR Location LIKE '%$searchq%' OR LastModified LIKE '%$searchq%' OR Rating LIKE '%$searchq%' OR Author LIKE '%$searchq%'");// or die ("Could not search.");
+            $query = mysql_query("SELECT * FROM documents WHERE ID LIKE '%$searchq%' OR Name LIKE '%$searchq%' OR Location LIKE '%$searchq%' Or LastModified LIKE '%$searchq%' Or Rating LIKE '%$searchq%' Or Author LIKE '%$searchq%'") or die ("Could not search.");
 
-            $count = mysqli_num_rows($query);
-            
             //if no matches to the search
             if($count == 0){
                 $output = 'There were no results for your search.';
 
             }else{
-            ?>
-            
-            <h2>Search Results</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Document ID</td>
-                        <td>Document Name</td>
-                        <td>File Location</td>
-                        <td>Last Edited</td>
-                        <td>Rating</td>
-                        <td>Author</td>
-                        <td>Tags</td>
-                    </tr>
-                </thead>
-                <tbody>
-            
-                <?php
-                
                 //While loop to collect relevant information from the rows
-                while($row = mysqli_fetch_assoc($query)){
-                ?>
-                    <tr>
-                            <td><?php echo $row['ID']?></td>
-                            <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_replace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
-                            <td><?php echo $row['Location']?></td>
-                            <td><?php echo $row['LastModified']?></td>
-                            <td><?php echo $row['Rating']?></td>
-                            <td><?php echo $row['Author']?></td>
-                            <td></td>
-                    </tr>
-                <?php
+                while($row = mysql_fetch_array($query)){
+                    $docID = $row['ID'];
+                    $docName = $row['Name'];
+                    $loc = $row['Location'];
+                    $moddate = $row['LastModified'];
+                    $rated = $row['Rating'];
+                    $author = $row['Author'];
+
+                    $output .= '<div>'.$docID.' '.$docName.' '.$loc.' '.$moddate.' '.$rated.' '.$author.'</div>';
+
                 }
-                ?>
-                </tbody>
-            </table>
-                <?php
             }   
         }
+        }
         ?>
-            <hr size="6" width="100%" align="center" color="black">
-            <h2>All Documents</h2>
+
+        <div class="topnav">
+            <form action="index.php" method="post">
+                <input type="text" name="search" placeholder="Search" />
+                <input type="submit" value="Go" />
+            </form>
+
+
+        <?php // outputting search results on button click
+        print("$output");?>
+
+        </div>
+
+
+
+
+            <hr size="6" width="75%" align="left" color="black">
+
             <table>
                 <thead>
                     <tr>
                         <td>Document ID</td>
-                        <td>Document Name</td>
                         <td>File Location</td>
+                        <td>Document Name</td>
                         <td>Last Edited</td>
                         <td>Rating</td>
                         <td>Author</td>
@@ -110,8 +82,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $results = mysqli_query($connect, "SELECT * FROM documents WHERE Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt'");
+                <?php
+                    $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+                    if (!$connect) {
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                        die(mysqli_error());
+                    }
+                    
+                    $results = mysqli_query($connect, "SELECT * FROM documents");
                     
                     if (!$results) {
                         $message  = 'Invalid query: ' . mysqli_error() . "\n";
@@ -122,16 +100,14 @@
                     ?>
                         <tr>
                             <td><?php echo $row['ID']?></td>
-                            <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_replace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
                             <td><?php echo $row['Location']?></td>
+                            <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_replace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
                             <td><?php echo $row['LastModified']?></td>
                             <td><?php echo $row['Rating']?></td>
                             <td><?php echo $row['Author']?></td>
                             <td></td>
                         </tr>
-                    <?php
-                    }
-                    ?>
+                        
                 </tbody>
             </table>
             <footer>
