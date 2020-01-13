@@ -39,10 +39,10 @@
                         die(mysqli_error());
                     }
                     
-                    $results = mysqli_query("SELECT * FROM documents");
+                    $results = mysqli_query($connect, "SELECT * FROM documents");
                     
                     if (!$results) {
-                        $message  = 'Invalid query: ' . mysql_error() . "\n";
+                        $message  = 'Invalid query: ' . mysqli_error() . "\n";
                         die($message);
                     }
                     
