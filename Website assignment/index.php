@@ -33,11 +33,11 @@
                 </thead>
                 <tbody>
                 <?php
-                    $connect = mysqli_connect("localhost","next", "nextTeam2");
+                    $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
                     if (!$connect) {
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
                         die(mysqli_error());
                     }
-                    mysqli_select_db("nextDocumentManager");
                     $results = mysqli_query("SELECT * FROM documents");
                     while($row = mysqli_fetch_array($results)) {
                     ?>
