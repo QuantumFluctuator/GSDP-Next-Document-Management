@@ -87,7 +87,7 @@
                 </thead>
                 <tbody>
                     <?php
-                    $results = mysqli_query($connect, "SELECT * FROM documents");
+                    $results = mysqli_query($connect, "SELECT * FROM documents WHERE Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt'");
                     
                     if (!$results) {
                         $message  = 'Invalid query: ' . mysqli_error() . "\n";
