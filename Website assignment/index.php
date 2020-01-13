@@ -38,11 +38,11 @@
                         echo "Failed to connect to MySQL: " . mysqli_connect_error();
                         die(mysqli_error());
                     }
+                    
                     $results = mysqli_query("SELECT * FROM documents");
                     
                     if (!$results) {
                         $message  = 'Invalid query: ' . mysql_error() . "\n";
-                        $message .= 'Whole query: ' . $query;
                         die($message);
                     }
                     
