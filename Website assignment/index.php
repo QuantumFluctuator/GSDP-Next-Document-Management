@@ -35,11 +35,11 @@
                 <?php
                     $connect = mysqli_connect("localhost","next", "nextTeam2");
                     if (!$connect) {
-                        die(mysql_error());
+                        die(mysqli_error());
                     }
-                    mysql_select_db("nextDocumentManager");
-                    $results = mysql_query("SELECT * FROM documents");
-                    while($row = mysql_fetch_array($results)) {
+                    mysqli_select_db("nextDocumentManager");
+                    $results = mysqli_query("SELECT * FROM documents");
+                    while($row = mysqli_fetch_array($results)) {
                     ?>
                         <tr>
                             <td><?php echo $row['ID']?></td>
@@ -49,8 +49,8 @@
                     <?php
                     }
                     ?>
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
             <footer>
                     <p>All work copyright &copy; of Ben Flemming, Zak Edwards, Evan Crabtree, Declan Eagle 2020</p>
             </footer>
