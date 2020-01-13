@@ -395,3 +395,12 @@ span.psw {
 	
 	float: right;
 }
+
+h2 {
+    text-align: center;
+}
+
+mark {
+    background-color: rgba(0, 0, 0, 0);
+    color: red;
+}
