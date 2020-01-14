@@ -37,15 +37,15 @@
         
         //print_r($results);
         
-        /*$delete = mysqli_query($connect, "DELETE FROM documents WHERE 1");
+        $delete = mysqli_query($connect, "DELETE FROM documents WHERE 1");
 
         if ($connect->query($delete) === TRUE) {
             echo "<br>Table cleared successfully";
         } else {
             echo "Error: " . $sql . "<br>" . $connect->error;
-        }*/
+        }
         
-        while ($i <= count($results)) {
+        while ($i < count($results)) {
             $name = basename($results[$i]);
             $loc = str_replace($name, "", $results[$i]);
             
