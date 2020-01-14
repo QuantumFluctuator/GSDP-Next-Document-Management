@@ -51,7 +51,7 @@
             $searchq = preg_replace("#[^0-9 a-z . _ ]#i","",$searchq);
 
             //SQL query, comparing search string to column data
-            $query = mysqli_query($connect, "SELECT * FROM documents WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (Name LIKE '%$searchq%' OR ID LIKE '%$searchq%' OR Location LIKE '%$searchq%' OR LastModified LIKE '%$searchq%' OR Rating LIKE '%$searchq%' OR Author LIKE '%$searchq%')") or die ("Could not search.");
+            $query = mysqli_query($connect, "SELECT * FROM documents WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (Name LIKE '%$searchq%' OR ID LIKE '%$searchq%' OR Location LIKE '%$searchq%' OR LastModified LIKE '%$searchq%' OR Author LIKE '%$searchq%')") or die ("Could not search.");
 
             $count = mysqli_num_rows($query);
 
@@ -84,25 +84,25 @@
                 while($row = mysqli_fetch_assoc($query)){
                 ?>
                 <tr>
-                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['ID'])?></td>
-                    <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name']) . "</a>"?></td>
-                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Location'])?></td>
-                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['LastModified'])?></td>
+                    <td><?php echo $row['ID']?></td>
+                    <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_replace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
+                    <td><?php echo $row['Location']?></td>
+                    <td><?php echo $row['LastModified']?></td>
                     <td>
                     <?php
                     $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Ratings WHERE Ratings.DocumentID = " . $row['ID']);
                     echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
                     ?>
                     </td>
-                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Author'])?></td>
+                    <td><?php echo $row['Author']?></td>
                     <td><?php echo str_replace("1", "Yes", str_replace("0", "No", $row['Approved']))?></td>
                     <td>
                         <?php
                     $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
-                    if (!$results) {
+                    /*if (!$results) {
                         $message  = 'Invalid query: ' . mysqli_error() . "\n";
                         die($message);
-                    }
+                    }*/
 
                     while ($row1 = mysqli_fetch_assoc($tags)) {
                         echo $row1['TagName'] . "<br>";
@@ -136,7 +136,7 @@
             </thead>
             <tbody>
                 <?php
-                $results = mysqli_query($connect, "SELECT * FROM documents WHERE Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt'");
+                $results = mysqli_query($connect, "SELECT * FROM documents WHERE Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt'") or die ("Could not search.");
 
                 if (!$results) {
                     $message  = 'Invalid query: ' . mysqli_error() . "\n";
