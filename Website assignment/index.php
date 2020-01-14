@@ -72,6 +72,8 @@
                     <td>Last Edited</td>
                     <td>Rating</td>
                     <td>Author</td>
+                    <td>Approved</td>
+                    <td>Tags</td>
                 </tr>
             </thead>
             <tbody>
@@ -86,8 +88,27 @@
                     <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name']) . "</a>"?></td>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Location'])?></td>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['LastModified'])?></td>
-                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Rating'])?></td>
+                    <td>
+                    <?php
+                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Ratings WHERE Ratings.DocumentID = " . $row['ID']);
+                    echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
+                    ?>
+                    </td>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Author'])?></td>
+                    <td><?php echo str_replace("1", "Yes", str_replace("0", "No", $row['Approved']))?></td>
+                    <td>
+                        <?php
+                    $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
+                    if (!$results) {
+                        $message  = 'Invalid query: ' . mysqli_error() . "\n";
+                        die($message);
+                    }
+
+                    while ($row1 = mysqli_fetch_assoc($tags)) {
+                        echo $row1['TagName'] . "<br>";
+                    }
+                    ?>
+                    </td>
                 </tr>
                 <?php
                 }
@@ -109,6 +130,8 @@
                     <td>Last Edited</td>
                     <td>Rating</td>
                     <td>Author</td>
+                    <td>Approved</td>
+                    <td>Tags</td>
                 </tr>
             </thead>
             <tbody>
@@ -127,8 +150,27 @@
                     <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_replace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
                     <td><?php echo $row['Location']?></td>
                     <td><?php echo $row['LastModified']?></td>
-                    <td><?php echo $row['Rating']?></td>
+                    <td>
+                    <?php
+                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Ratings WHERE Ratings.DocumentID = " . $row['ID']);
+                    echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
+                    ?>
+                    </td>
                     <td><?php echo $row['Author']?></td>
+                    <td><?php echo str_replace("1", "Yes", str_replace("0", "No", $row['Approved']))?></td>
+                    <td>
+                        <?php
+                    $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
+                    if (!$results) {
+                        $message  = 'Invalid query: ' . mysqli_error() . "\n";
+                        die($message);
+                    }
+
+                    while ($row1 = mysqli_fetch_assoc($tags)) {
+                        echo $row1['TagName'] . "<br>";
+                    }
+                    ?>
+                    </td>
                 </tr>
                 <?php
                 }
@@ -138,6 +180,8 @@
 
         <hr size="6" width="100%" align="center" color="black">
 
+        <button class=adminbutton type="submit" onclick="location.href='rescan.php' ">ADMIN RESCAN</button>
+        
         <footer>
             <p>All work copyright &copy; of Ben Flemming, Zak Edwards, Evan Crabtree, Declan Eagle 2020</p>
         </footer>
