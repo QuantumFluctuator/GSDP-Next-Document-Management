@@ -84,17 +84,17 @@
                 while($row = mysqli_fetch_assoc($query)){
                 ?>
                 <tr>
-                    <td><?php echo $row['ID']?></td>
-                    <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_replace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
-                    <td><?php echo $row['Location']?></td>
-                    <td><?php echo $row['LastModified']?></td>
+                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['ID'])?></td>
+                    <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name']) . "</a>"?></td>
+                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Location'])?></td>
+                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['LastModified'])?></td>
                     <td>
                     <?php
                     $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Ratings WHERE Ratings.DocumentID = " . $row['ID']);
                     echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
                     ?>
                     </td>
-                    <td><?php echo $row['Author']?></td>
+                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Author'])?></td>
                     <td><?php echo str_replace("1", "Yes", str_replace("0", "No", $row['Approved']))?></td>
                     <td>
                         <?php
