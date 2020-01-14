@@ -9,7 +9,7 @@
         <div id="container">
             <header>
                 <div id="logo">
-                    <h1><a href="index.html">NEXT DOCUMENT MANAGER</a></h1>
+                    <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>
                 </div>
             </header>
 

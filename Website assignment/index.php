@@ -24,7 +24,7 @@
 
             <div class = "buttons">
                 <!--Button to take user to login form !-->
-                <button type="submit" onclick="location.href='contact-me.html' ">Sign in</button>
+                <button type="submit" onclick="location.href='login.php' ">Sign in</button>
 
                 <div class = "upload">
                     <form action="upload.php" method="post" enctype="multipart/form-data">
