@@ -4,122 +4,25 @@ body{
     font-size:1em;
 }
 
-/* Photo Banner */
-.container {
-    /*making sure the banner fills entire length of screen*/
-    width: 102	%;
-    overflow: hidden;
-    margin: 10px auto;
-    margin-left: -10px;	
-    margin-right: -10px;
-    background: black;
-}
-
-.photobanner, .photobanner2 {
-    height: 35px;
-    width: 3550px;
-    font-size: 0;
-}
-
-.photobanner img, .photobanner2 img {
-    margin-bottom: 10px;
-    margin-right: 5px;
-    height: 33px;
-    width: 350px;
-}
-
-.photobanner img  {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-/*keyframe animations*/
-.first {
-    -webkit-animation: bannermove 30s linear infinite;
-    -moz-animation: bannermove 30s linear infinite;
-    -ms-animation: bannermove 30s linear infinite;
-    -o-animation: bannermove 30s linear infinite;
-    animation: bannermove 30s linear infinite;
-}
-
-@keyframes "bannermove" {
-    0% {margin-left: 0px;}
-    100% {margin-left: -2130px;}
-}
-
-@-moz-keyframes bannermove {
-    0% {margin-left: 0px;}
-    100% {margin-left: -2130px;}
-}
-
-@-webkit-keyframes "bannermove" {
-    0% {margin-left: 0px;}
-    100% {margin-left: -2130px;}
-}
-
-@-ms-keyframes "bannermove" {
-    0% {margin-left: 0px;}
-    100% {margin-left: -2130px;}
-}
-
-@-o-keyframes "bannermove" {
-    0% {margin-left: 0px;}
-    100% {margin-left: -2130px;}
-}
-
-.second {
-    -webkit-animation: bannermoves 30s linear infinite;
-    -moz-animation: bannermoves 30s linear infinite;
-    -ms-animation: bannermoves 30s linear infinite;
-    -o-animation: bannermoves 30s linear infinite;
-    animation: bannermoves 30s linear infinite;
-}
-
-@keyframes "bannermoves" {
-    0% {margin-left: -2130px;}
-    100% {margin-left: 0px;}
-}
-
-@-moz-keyframes bannermoves {
-    0% {margin-left: -2130px;}
-    100% {margin-left: 0px;}
-}
-
-@-webkit-keyframes "bannermoves" {
-    0% {margin-left: -2130px;}
-    100% {margin-left: 0px;}
-}
-
-@-ms-keyframes "bannermoves" {
-    0% {margin-left: -2130px;}
-    100% {margin-left: 0px;}
-}
-
-@-o-keyframes "bannermoves" {
-    0% {margin-left: -2130px;}
-    100% {margin-left: 0px;}
-}
-
 /*font of header logo*/
 h1, h2{
     font-family: 'Roboto', sans-serif;
 }
+
 /*opacity of front page image*/
 img{
-    opacity: 0.9	;	
+    opacity: 0.9;	
 }
 
 /*navigation menu container*/
-#container{
+.container{
     width:100%;	
     margin:auto;
     max-width: 1200px;
     min-width: 600px;
     /*when browser in windowed mode, prevents blending directly with side of window*/
     padding-left: 10px;
+    background-color: #BBBBBB;
 }
 
 /*header with name and page links */
@@ -184,39 +87,12 @@ nav li:first-child{
     color:#000;	
 }
 
-/*Allowing the logo to scale as the window is resized*/
-#content{	
-    display: flex;
-}
 section{
     padding:0 10px 10px 0;
 }
-.resize-img{
-    width:80%;
-    height:80%;
-}
 
-/* side bar with contact information */
-.sidebar{
-    min-width: 200px;
-    max-height: 350px;
-    padding-bottom: :10px;
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    margin-left:auto;
-    margin-top: 20px;
-}
-
-/* Creates a box aligned to the right hand side*/
-.floatRight{
-    float:right;
-    padding:5px;
-    border:1px solid #ccc;
-
-}
 table{
-    width:1200px;	
+    width:1200px;
 }
 th, td{
     padding:10px 4px;
@@ -290,13 +166,6 @@ footer{
     margin-left: auto;
     margin-right: auto;
     width: 70%;
-}
-
-/*video properties, used to center the video*/
-video {
-    display: flex;
-    margin: auto;
-    width: 55%;
 }
 
 /*changing the table assets so any table made is centre of the page, as that is the layout of the site*/
@@ -391,12 +260,7 @@ span.psw {
 
 }
 
-.buttons{
-
-}
-
 .upload{
-
     float: right;
 }
 

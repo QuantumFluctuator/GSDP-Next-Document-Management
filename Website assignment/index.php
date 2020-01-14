@@ -15,16 +15,18 @@
     </head>
 
     <body>
-        <div id="container">
+        <div class=container>
             <header>
                 <div id="logo">
                     <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>
                 </div>
             </header>
 
-            <div class = "buttons">
+            <div>
                 <!--Button to take user to login form !-->
                 <button type="submit" onclick="location.href='login.php' ">Sign in</button>
+                
+                <!-- TODO: NEED NEW BUTTONS HERE FOR CHANGING TAGS AND RATING A FILE -->
 
                 <div class = "upload">
                     <form action="upload.php" method="post" enctype="multipart/form-data">
@@ -61,7 +63,7 @@
 
             }else{
         ?>
-        <hr size="6" width="100%" align="center" color="black">
+        <hr size="6" width="75%" align="center" color="black">
         <h2>Search Results</h2>
         <table>
             <thead>
@@ -119,7 +121,7 @@
             }   
         }
         ?>
-        <hr size="6" width="100%" align="center" color="black">
+        <hr size="6" width="75%" align="center" color="black">
         <h2>All Documents</h2>
         <table>
             <thead>
@@ -178,9 +180,11 @@
             </tbody>
         </table>
 
-        <hr size="6" width="100%" align="center" color="black">
-
-        <button class=adminbutton type="submit" onclick="location.href='rescan.php' ">ADMIN RESCAN</button>
+        <hr size="6" width="75%" align="center" color="black">
+        
+        <div class=container>
+            <button class=adminbutton type="submit" onclick="location.href='rescan.php' ">ADMIN RESCAN</button>
+        </div>
         
         <footer>
             <p>All work copyright &copy; of Ben Flemming, Zak Edwards, Evan Crabtree, Declan Eagle 2020</p>
