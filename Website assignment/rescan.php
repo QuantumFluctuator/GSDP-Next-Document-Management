@@ -33,7 +33,7 @@
         
         $i = 0;
         
-        mysqli_query($connect, "DELETE FROM Ratings WHERE 1");
+        mysqli_query($connect, "DELETE FROM Rating WHERE 1");
         mysqli_query($connect, "DELETE FROM TagLink WHERE 1");
         $delete = mysqli_query($connect, "DELETE FROM documents WHERE 1");
 

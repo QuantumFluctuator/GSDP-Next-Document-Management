@@ -23,20 +23,13 @@
                 <?php
                 if(isset($_POST['submit'])) 
                 {   
-                    echo "<br>1. ";
-                    echo $name= $_FILES['file']['name'];
-                    echo "<br>2. ";
-                    echo $tmp_name= $_FILES['file']['tmp_name'];
-                    echo "<br>3. ";
-                    echo $submitbutton= $_POST['submit'];
-                    echo "<br>4. ";
-                    echo $position= strpos($name, ".");
-                    echo "<br>5. ";
-                    echo $fileextension= substr($name, $position + 1);
-                    echo "<br>6. ";
-                    echo $fileextension= strtolower($fileextension);
-                    echo "<br>7. ";
-                    echo $path= $_POST['path']; // saves description enterd
+                    $name= $_FILES['file']['name'];
+                    $tmp_name= $_FILES['file']['tmp_name'];
+                    $submitbutton= $_POST['submit'];
+                    $position= strpos($name, ".");
+                    $fileextension= substr($name, $position + 1);
+                    $fileextension= strtolower($fileextension);
+                    $path= $_POST['path']; // saves path entered
                     $connect = mysqli_connect("localhost", "next", "nextTeam2", "nextDocumentManager");
 
                     if (!$connect) {
@@ -46,9 +39,9 @@
                     {
                         if (!empty($name))
                         {
-                            if (move_uploaded_file($name, $path)) 
+                            if (move_uploaded_file($tmp_name, $path.$name)) 
                             {
-                                echo "P!";
+                                echo "Successfully transferred!";
                             }
                         }
                     }
@@ -56,18 +49,16 @@
 
                 if(!empty($path))
                 {
-                    $file_pointer = $path; 
-                    if (file_exists($file_pointer))
-                    {
-                        echo "The file $file_pointer exists"; 
-                        mysqli_query($connection,"INSERT INTO documents (Name, Location, Approved)
-                    VALUES ('$name', '$path', FALSE)");
-                    }
-                    else 
-                    { 
-                        echo "The file $file_pointer does not exists"; 
-                    } 
+                    $file_pointer = $path;
 
+                    $path = str_replace("Documents/", "", $path);
+                    $insert = "INSERT INTO documents (Name, Location, Approved) VALUES ('$name', '$path', FALSE)";
+                    //$sql = mysqli_query($connection,"INSERT INTO documents (Name, Location, Approved) VALUES ('$name', '$path', FALSE)");
+                    if ($connect->query($insert) === TRUE) {
+                        echo "<br>New record created successfully";
+                    } else {
+                        echo "<br>Error: " . $sql . "<br>" . $connect->error;
+                    }
                 }
                 mysqli_close($connection);
                 ?>
