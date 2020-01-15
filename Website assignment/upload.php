@@ -14,61 +14,81 @@
                 </div>
             </header>
 
-            <?php
-            //connecting to table
-            $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
-            
-            $target_dir = "Documents/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $uploadOk = 1;
-            $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            $file =$_FILES['file'];
-            $name = $file['name'];
+             <input type="file" id="myFile" name="filename">
+             <button type="file" name="fileToUpload" id="fileToUpload"> Upload Document </button>
 
-            // Check if image file is a actual image or fake image
-            if(isset($_POST["submit"])) {
-                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-                if($check !== false) 
+
+            <?php
+            if(isset($_POST['submit'])) 
+            {   
+                    $name= $_FILES['file']['name'];
+
+                    $tmp_name= $_FILES['file']['tmp_name'];
+
+                    $submitbutton= $_POST['submit'];
+
+                    $position= strpos($name, "."); 
+
+                    $fileextension= substr($name, $position + 1);
+
+                    $fileextension= strtolower($fileextension);
+
+                    $description= $_POST['description_entered']; // saves description enterd 
+
+
+            $dbase = "documents";
+            $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+        
+            if (!$connect) {
+                echo "Failed to connect";
+            }
+
+
+            if (isset($name)) 
+            {
+
+                $path= 'uploads/files/';
+
+            if (!empty($name))
+            {
+                if (move_uploaded_file($tmp_name, $path.$name)) 
                 {
-                    echo "File is a document - " . $check["mime"] . ".";
-                    $uploadOk = 1;
-                } 
-                else {
-                    echo "File is not a document.";
-                    $uploadOk = 0;
+
                 }
             }
+        }
+    }
+            ?>
 
-            $path = "Documents/" . basename($name);
-            if (move_uploaded_file($file['tmp_name'], $path)) {
-                // Move succeed.
-                echo "File uploaded succesfully.";
-            } else {
-                // Move failed. Possible duplicate?
-                echo "File upload failed, check if your document is a duplicate.";
+            <?php
+
+            // Include the database configuration file
+
+        
+            mysqli_select_db($connection, $dbase);
+
+            if(!empty($description))
+            {
+                $file_pointer = $description; 
+
+                if (file_exists($file_pointer))
+                {
+                    echo "The file $file_pointer exists"; 
+                    mysqli_query($connection,"INSERT INTO $table (description, filename)
+                    VALUES ('$description', '$name')");
+                }
+
+                else 
+                { 
+                    echo "The file $file_pointer does not exists"; 
+                } 
+    
             }
-            
 
-            //inserting uploaded file 
-            $sql = "INSERT INTO documents (Name, Location, LastModified, Author) VALUES ('$docName', '$loc', '$moddate', '$rated', '$approved', '$author')";
 
-            // Check file size
-            if ($_FILES["fileToUpload"]["size"] > 100000000) {
-                echo "Sorry, your file is too large.";
-                $uploadOk = 0;
-            }
 
-            // Check if file already exists
-            if (file_exists($target_file)) {
-                echo "Sorry, file already exists.";
-                $uploadOk = 0;
-            }
+            mysqli_close($connection);
 
-            // Allow certain file formats
-            if($fileType != "doc" && $fileType != "docx" && $fileType != "txt") {
-                echo "Sorry, only DOC, DOCX and TXT files are allowed.";
-                $uploadOk = 0;
-            }
             ?>
 
             <footer>
