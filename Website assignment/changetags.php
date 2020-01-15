@@ -20,11 +20,11 @@
                     <legend>Edit Tags:</legend>
                     <label>Enter a document ID:</label>
                     <p>
-                        <input type="text" name="Doc ID"/>
+                        <input type="text" name="DocID"/>
                     </p>
                     <label>Add a new tag ID:</label>
                     <p>
-                        <input type="text" name="Tag ID"/>
+                        <input type="text" name="TagID"/>
                     </p>
 
                     <!--<form action= "script.php" method = "get" >
@@ -38,18 +38,11 @@
                             echo "Failed to connect to MySQL: " . mysqli_connect_error();
                             die(mysqli_error());
                         }
-
-                        $id= $_GET['Doc ID']; // saves description enterd 
-                        $tagid= $_GET['Tag ID'];
-
-                        echo $id;
-                        echo $tagid;
-
+                        $id= $_GET['DocID']; // saves description enterd 
+                        $tagid= $_GET['TagID'];
                         $insert = mysqli_query($connect, "INSERT INTO TagLink (ID, TagID) VALUES ($id, $tagid)");
                         if ($connect->query($insert) === TRUE) {
                             echo "<br>New tag added successfully";
-                        } else {
-                            echo "<br>Error: " . $sql . "<br>" . $connect->error;
                         }
                     } else {
                     ?>
