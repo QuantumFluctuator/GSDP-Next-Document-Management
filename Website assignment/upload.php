@@ -14,83 +14,64 @@
                 </div>
             </header>
 
-             <input type="file" id="myFile" name="filename">
-             <button type="file" name="fileToUpload" id="fileToUpload"> Upload Document </button>
+            <form action="#file" method='post' enctype="multipart/form-data">
+                Filepath: <input type="text" name="path"/>
+                <input type="file" name="file">
+                <input type="submit" name="submit" value="Upload">
 
 
-            <?php
-            if(isset($_POST['submit'])) 
-            {   
-                    $name= $_FILES['file']['name'];
+                <?php
+                if(isset($_POST['submit'])) 
+                {   
+                    echo "<br>1. ";
+                    echo $name= $_FILES['file']['name'];
+                    echo "<br>2. ";
+                    echo $tmp_name= $_FILES['file']['tmp_name'];
+                    echo "<br>3. ";
+                    echo $submitbutton= $_POST['submit'];
+                    echo "<br>4. ";
+                    echo $position= strpos($name, ".");
+                    echo "<br>5. ";
+                    echo $fileextension= substr($name, $position + 1);
+                    echo "<br>6. ";
+                    echo $fileextension= strtolower($fileextension);
+                    echo "<br>7. ";
+                    echo $path= $_POST['path']; // saves description enterd
+                    $connect = mysqli_connect("localhost", "next", "nextTeam2", "nextDocumentManager");
 
-                    $tmp_name= $_FILES['file']['tmp_name'];
-
-                    $submitbutton= $_POST['submit'];
-
-                    $position= strpos($name, "."); 
-
-                    $fileextension= substr($name, $position + 1);
-
-                    $fileextension= strtolower($fileextension);
-
-                    $description= $_POST['description_entered']; // saves description enterd 
-
-
-            $dbase = "documents";
-            $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
-        
-            if (!$connect) {
-                echo "Failed to connect";
-            }
-
-
-            if (isset($name)) 
-            {
-
-                $path= 'uploads/files/';
-
-            if (!empty($name))
-            {
-                if (move_uploaded_file($tmp_name, $path.$name)) 
-                {
-
-                }
-            }
-        }
-    }
-            ?>
-
-            <?php
-
-            // Include the database configuration file
-
-        
-            mysqli_select_db($connection, $dbase);
-
-            if(!empty($description))
-            {
-                $file_pointer = $description; 
-
-                if (file_exists($file_pointer))
-                {
-                    echo "The file $file_pointer exists"; 
-                    mysqli_query($connection,"INSERT INTO $table (description, filename)
-                    VALUES ('$description', '$name')");
+                    if (!$connect) {
+                        echo "Failed to connect";
+                    }
+                    if (isset($name)) 
+                    {
+                        if (!empty($name))
+                        {
+                            if (move_uploaded_file($name, $path)) 
+                            {
+                                echo "P!";
+                            }
+                        }
+                    }
                 }
 
-                else 
-                { 
-                    echo "The file $file_pointer does not exists"; 
-                } 
-    
-            }
+                if(!empty($path))
+                {
+                    $file_pointer = $path; 
+                    if (file_exists($file_pointer))
+                    {
+                        echo "The file $file_pointer exists"; 
+                        mysqli_query($connection,"INSERT INTO documents (Name, Location, Approved)
+                    VALUES ('$name', '$path', FALSE)");
+                    }
+                    else 
+                    { 
+                        echo "The file $file_pointer does not exists"; 
+                    } 
 
-
-
-            mysqli_close($connection);
-
-            ?>
-
+                }
+                mysqli_close($connection);
+                ?>
+            </form>
             <footer>
                 <p>All work copyright &copy; of Ben Flemming, Zak Edwards, Evan Crabtree, Declan Eagle 2020</p>
             </footer>
