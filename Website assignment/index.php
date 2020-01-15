@@ -34,7 +34,11 @@
                     </form>
                 </div>
                 
-                <!-- TODO: NEED NEW BUTTONS HERE FOR CHANGING TAGS AND RATING A FILE -->
+                <!--  BUTTONS HERE FOR CHANGING TAGS AND RATING A FILE -->
+
+                         <button name="rateButton" type="submit" onclick="location.href='rate.php' ">Rate File </button>
+                         <button name="changeButton" type="submit" onclick="location.href='changetags.php' "> Change/Add Tags </button>
+                
             </div>
         </div>
 

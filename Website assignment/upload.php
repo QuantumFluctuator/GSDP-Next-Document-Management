@@ -15,11 +15,15 @@
             </header>
 
             <?php
+            //connecting to table
+            $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+            
             $target_dir = "Documents/";
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             $uploadOk = 1;
             $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            $name = $fileToUpload['name'];
+            $file =$_FILES['file'];
+            $name = $file['name'];
 
             // Check if image file is a actual image or fake image
             if(isset($_POST["submit"])) {
@@ -36,16 +40,14 @@
             }
 
             $path = "Documents/" . basename($name);
-            if (move_uploaded_file($fileToUpload['tmp_name'], $path)) {
+            if (move_uploaded_file($file['tmp_name'], $path)) {
                 // Move succeed.
                 echo "File uploaded succesfully.";
             } else {
                 // Move failed. Possible duplicate?
                 echo "File upload failed, check if your document is a duplicate.";
             }
-
-            //connecting to table
-            $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+            
 
             //inserting uploaded file 
             $sql = "INSERT INTO documents (Name, Location, LastModified, Author) VALUES ('$docName', '$loc', '$moddate', '$rated', '$approved', '$author')";
