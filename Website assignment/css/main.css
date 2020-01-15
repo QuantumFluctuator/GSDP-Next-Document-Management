@@ -257,7 +257,6 @@ span.psw {
     font-size: 17px;
     background-color: #e9e9e9;
     width: 500px;
-
 }
 
 
@@ -266,13 +265,7 @@ span.psw {
 }
 
 .upload{
-
     float: right;
-    border: 3px solid #f1f1f1;
-    border-radius: 5px;
-
-    
-
 }
 
 input[name="chooseFile"]{

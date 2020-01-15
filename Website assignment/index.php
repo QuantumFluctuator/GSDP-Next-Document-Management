@@ -29,8 +29,7 @@
                 <div class = "upload">
                      <!--Select file to upload !-->
                      <form action="upload.php" method="post" enctype="multipart/form-data">
-                         <input name="chooseFile" type="file" id="myFile" name="filename">
-                         <button type="file" name="fileToUpload" id="fileToUpload"> Upload Document </button>
+                         <button onclick="location.href='upload.php'" name="fileToUpload" id="fileToUpload"> Upload Document </button>
                     </form>
                 </div>
                 
