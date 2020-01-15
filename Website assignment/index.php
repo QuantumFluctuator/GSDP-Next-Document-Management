@@ -92,7 +92,7 @@
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['LastModified'])?></td>
                     <td>
                     <?php
-                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Ratings WHERE Ratings.DocumentID = " . $row['ID']);
+                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Rating WHERE Rating.DocumentID = " . $row['ID']);
                     echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
                     ?>
                     </td>
@@ -154,7 +154,7 @@
                     <td><?php echo $row['LastModified']?></td>
                     <td>
                     <?php
-                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Ratings WHERE Ratings.DocumentID = " . $row['ID']);
+                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Rating WHERE Rating.DocumentID = " . $row['ID']);
                     echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
                     ?>
                     </td>

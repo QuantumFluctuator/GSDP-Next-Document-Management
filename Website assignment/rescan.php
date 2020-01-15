@@ -46,7 +46,7 @@
         while ($i < count($results)) {
             $name = basename($results[$i]);
             $loc = str_replace($name, "", $results[$i]);
-            $author = fileowner("Documents/" . $results[$i]);
+            $author = str_replace("0", "Unknown", fileowner("Documents/" . $results[$i]));
             $last = date("Y-m-d", filemtime("Documents/" . $results[$i]));
             
             $id = $i;
