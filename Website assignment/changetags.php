@@ -6,14 +6,6 @@
         <link href="css/main.css" rel="stylesheet" type="text/css">
     </head>
 
-    <?php
-    $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
-    if (!$connect) {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        die(mysqli_error());
-    }
-    ?>
-
     <body>
         <div id="container">
             <header>
@@ -28,7 +20,7 @@
                     <legend>Edit Tags:</legend>
                     <label>Enter a document ID:</label>
                     <p>
-                        <input type="text" name="ID"/>
+                        <input type="text" name="Doc ID"/>
                     </p>
                     <label>Add a new tag ID:</label>
                     <p>
@@ -41,10 +33,18 @@
                     <?php
                     if (!empty($_POST['act'])) 
                     {
+                        $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+                        if (!$connect) {
+                            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                            die(mysqli_error());
+                        }
+
+                        $id= $_POST['Doc ID']; // saves description enterd 
+                        $tagid= $_POST['Tag ID'];
+
                         echo $id;
                         echo $tagid;
-                        $id= $_POST['ID']; // saves description enterd 
-                        $tagid= $_POST['Tag ID'];
+
                         $insert = mysqli_query($connect, "INSERT INTO TagLink (ID, TagID) VALUES ($id, $tagid)");
                         if ($connect->query($insert) === TRUE) {
                             echo "<br>New tag added successfully";
