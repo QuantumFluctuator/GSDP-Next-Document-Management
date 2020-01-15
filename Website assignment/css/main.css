@@ -260,8 +260,23 @@ span.psw {
 
 }
 
+
+.buttons{
+
+}
+
 .upload{
+
     float: right;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+
+    
+
+}
+
+input[name="chooseFile"]{
+    margin-right: -70px;
 }
 
 h2 {

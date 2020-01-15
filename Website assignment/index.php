@@ -25,16 +25,16 @@
             <div>
                 <!--Button to take user to login form !-->
                 <button type="submit" onclick="location.href='login.php' ">Sign in</button>
-                
-                <!-- TODO: NEED NEW BUTTONS HERE FOR CHANGING TAGS AND RATING A FILE -->
 
                 <div class = "upload">
-                    <form action="upload.php" method="post" enctype="multipart/form-data">
-                        <!--Select image to upload: !-->
-                        <button type="file" name="fileToUpload" id="fileToUpload"> Upload Document </button>
-
+                     <!--Select file to upload !-->
+                     <form action="upload.php" method="post" enctype="multipart/form-data">
+                         <input name="chooseFile" type="file" id="myFile" name="filename">
+                         <button type="file" name="fileToUpload" id="fileToUpload"> Upload Document </button>
                     </form>
                 </div>
+                
+                <!-- TODO: NEED NEW BUTTONS HERE FOR CHANGING TAGS AND RATING A FILE -->
             </div>
         </div>
 
