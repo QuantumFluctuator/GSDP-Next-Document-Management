@@ -24,8 +24,6 @@
         $results = array();
         $results = getDirContents('Documents/');
         
-        //var_dump(getDirContents('Documents/'));
-        
         $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
 
         if (!$connect) {
@@ -35,8 +33,8 @@
         
         $i = 0;
         
-        //print_r($results);
-        
+        mysqli_query($connect, "DELETE FROM Ratings WHERE 1");
+        mysqli_query($connect, "DELETE FROM TagLink WHERE 1");
         $delete = mysqli_query($connect, "DELETE FROM documents WHERE 1");
 
         if ($connect->query($delete) === TRUE) {
@@ -48,10 +46,12 @@
         while ($i < count($results)) {
             $name = basename($results[$i]);
             $loc = str_replace($name, "", $results[$i]);
+            $author = fileowner("Documents/" . $results[$i]);
+            $last = date("Y-m-d", filemtime("Documents/" . $results[$i]));
             
             $id = $i;
             
-            $insert = mysqli_query($connect, "INSERT INTO documents (ID, Name, Location, Approved) VALUES ($id, '$name', '$loc', FALSE)");
+            $insert = mysqli_query($connect, "INSERT INTO documents (ID, Name, Author, LastModified, Location, Approved) VALUES ($id, '$name', '$author', '$last', '$loc', FALSE)");
 
             if ($connect->query($insert) === TRUE) {
                 echo "<br>New record created successfully";
