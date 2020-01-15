@@ -41,9 +41,10 @@
                     <?php
                     if (!empty($_POST['act'])) 
                     {
+                        echo $id;
+                        echo $tagid;
                         $id= $_POST['ID']; // saves description enterd 
                         $tagid= $_POST['Tag ID'];
-
                         $insert = mysqli_query($connect, "INSERT INTO TagLink (ID, TagID) VALUES ($id, $tagid)");
                         if ($connect->query($insert) === TRUE) {
                             echo "<br>New tag added successfully";
@@ -55,7 +56,7 @@
 
                     <form action="changetags.php" method="post">
                         <input type="hidden" name="act" value="run">
-                        <input type="submit" value="Run me now!">
+                        <input type="submit" value="Submit">
                     </form>
 
                     <?php
