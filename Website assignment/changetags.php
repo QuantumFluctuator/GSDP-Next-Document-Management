@@ -31,7 +31,7 @@
                     <input type= "submit" value= "Submit" > -->
 
                     <?php
-                    if (!empty($_POST['act'])) 
+                    if (!empty($_GET['act'])) 
                     {
                         $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
                         if (!$connect) {
@@ -39,8 +39,8 @@
                             die(mysqli_error());
                         }
 
-                        $id= $_POST['Doc ID']; // saves description enterd 
-                        $tagid= $_POST['Tag ID'];
+                        $id= $_GET['Doc ID']; // saves description enterd 
+                        $tagid= $_GET['Tag ID'];
 
                         echo $id;
                         echo $tagid;
@@ -54,7 +54,7 @@
                     } else {
                     ?>
 
-                    <form action="changetags.php" method="post">
+                    <form action="changetags.php" method="get">
                         <input type="hidden" name="act" value="run">
                         <input type="submit" value="Submit">
                     </form>
