@@ -96,7 +96,7 @@
                     <td>
                     <?php
                     $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Rating WHERE Rating.DocumentID = " . $row['ID']);
-                    echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
+                    echo round(mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'], 2);
                     ?>
                     </td>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Author'])?></td>
@@ -158,7 +158,7 @@
                     <td>
                     <?php
                     $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Rating WHERE Rating.DocumentID = " . $row['ID']);
-                    echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
+                    echo round(mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'], 2);
                     ?>
                     </td>
                     <td><?php echo $row['Author']?></td>

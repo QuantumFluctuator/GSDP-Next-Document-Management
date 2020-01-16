@@ -45,7 +45,7 @@
                         if (($rating  < 0 ) || ($rating > 5)) {
                             echo "Enter a value between 1 and 5";
                         }
-                        while(($rating  > 0 ) || ($rating < 6) && ($id <= $MaxID)){
+                        if (($rating  > 0 ) || ($rating < 6) && ($id <= $MaxID)){
                             // Need to add user when login is added 
                             $insert = mysqli_query($connect,"INSERT INTO Rating (RatingValue, DocumentID) VALUES ($rating, $id)");
                             if ($connect->query($insert) === TRUE) {
