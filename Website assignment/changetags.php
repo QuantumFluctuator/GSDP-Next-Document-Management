@@ -26,10 +26,7 @@
                     <p>
                         <input type="text" name="TagID"/>
                     </p>
-
-                    <!--<form action= "script.php" method = "get" >
-                    <input type= "submit" value= "Submit" > -->
-
+                    
                     <?php
                     if (!empty($_GET['act'])) 
                     {
@@ -60,54 +57,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Support</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Architectural</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>User</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Analysis</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Design</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Testing</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Results</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Framework</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Planning</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>.docx</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>.doc</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>.txt</td>
-                            </tr>
+                            <?php
+                            $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+                            $results = mysqli_query($connect, "SELECT * FROM Tag") or die ("could not connect");
+                            while($row = mysqli_fetch_assoc($results)) {
+                                echo "<tr>";
+                                echo "<td>".$row['TagID']."</td>";
+                                echo "<td>".$row['TagName']."</td>";
+                                echo "</tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </fieldset>
