@@ -6,7 +6,7 @@
         <link href="css/main.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="container">
+        <div class="container">
             <header>
                 <div id="logo">
                     <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>

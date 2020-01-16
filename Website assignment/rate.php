@@ -7,12 +7,10 @@
     </head>
 
     <body>
-        <div id="container">
+        <div class="container">
             <header>
-                <div class="container">
-                    <div id="logo">
-                        <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>
-                    </div>
+                <div id="logo">
+                    <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>
                 </div>
             </header>
             <form>
