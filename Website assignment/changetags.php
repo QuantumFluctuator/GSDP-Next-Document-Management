@@ -14,6 +14,78 @@
                 </div>
             </header>
 
+            <div class="topnav">
+                <form action="changetags.php" method="post" align="center">
+                    <input type="text" name="search" placeholder="Search" />
+                    <input type="submit" value="Go" />
+                </form>
+            </div>
+
+            <?php
+            $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+            //Collect
+            if(isset($_POST['search'])) {
+                $searchq = $_POST['search'];
+                //Setting allowed characters, only numbers, letters and a small set of punctuation
+                $searchq = preg_replace("#[^0-9 a-z . _ ]#i","",$searchq);
+
+                //SQL query, comparing search string to column data
+                $query = mysqli_query($connect, "SELECT * FROM documents d INNER JOIN TagLink l ON d.ID=l.ID INNER JOIN Tag t ON t.TagID=l.TagID WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (l.TagName LIKE '%$searchq%')") or die ("Could not search.");
+
+                $count = mysqli_num_rows($query);
+
+                //if no matches to the search
+                if($count == 0){
+                    echo "<p class=noresults>There were no results for your search.</p><br>";
+
+                }else{
+            ?>
+            <hr size="6" width="75%" align="center" color="black">
+            <h2>Search Results</h2>
+            <table class="bordered">
+                <thead>
+                    <tr>
+                        <td>Document ID</td>
+                        <td>Document Name</td>
+                        <td>File Location</td>
+                        <td>Last Edited</td>
+                        <td>Author</td>
+                        <td>Tags</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php
+
+                    //While loop to collect relevant information from the rows
+                    while($row = mysqli_fetch_assoc($query)){
+                    ?>
+                    <tr>
+                        <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['ID'])?></td>
+                        <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name']) . "</a>"?></td>
+                        <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Location'])?></td>
+                        <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['LastModified'])?></td>
+                        <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Author'])?></td>
+                        <td>
+                        <?php
+                        $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
+
+                        while ($row1 = mysqli_fetch_assoc($tags)) {
+                            echo $row1['TagName'] . "<br>";
+                        }
+                        ?>
+                        </td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <?php
+                }   
+            }
+            ?>
+
             <div class="bordered">
                 <form>
                     <legend><h3>Edit Tags</h3></legend>
@@ -72,7 +144,7 @@
                     </form>
 
                 </form>
-                
+
                 <table>
                     <thead>
                         <tr>
