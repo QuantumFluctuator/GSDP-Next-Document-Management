@@ -239,3 +239,8 @@ mark {
 .noresults {
     text-align: center;
 }
+
+form {
+    border: 2px solid black;
+    padding: 8px;
+}
