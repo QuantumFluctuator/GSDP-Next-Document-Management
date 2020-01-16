@@ -33,15 +33,10 @@
         
         $i = 0;
         
-        mysqli_query($connect, "DELETE FROM Rating WHERE 1");
-        mysqli_query($connect, "DELETE FROM TagLink WHERE 1");
-        $delete = mysqli_query($connect, "DELETE FROM documents WHERE 1");
-
-        if ($connect->query($delete) === TRUE) {
-            echo "<br>Table cleared successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $connect->error;
-        }
+        mysqli_query($connect, "DELETE FROM Rating");
+        mysqli_query($connect, "DELETE FROM documents");
+        mysqli_query($connect, "DELETE FROM TagLink");
+        
         
         while ($i < count($results)) {
             $name = basename($results[$i]);
@@ -53,16 +48,14 @@
             
             $insert = mysqli_query($connect, "INSERT INTO documents (ID, Name, Author, LastModified, Location, Approved) VALUES ($id, '$name', '$author', '$last', '$loc', FALSE)");
 
-            if ($connect->query($insert) === TRUE) {
-                echo "<br>New record created successfully";
-            } else {
-                echo "<br>Error: " . $sql . "<br>" . $connect->error;
-            }
+            echo $sql . "<br>" . $connect->error;
         
             $i++;
         }
         
         $connect->close();
+        header("Location: index.php");
+        die();
         ?>
     </body>
 </html>
