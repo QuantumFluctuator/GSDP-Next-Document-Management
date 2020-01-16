@@ -31,7 +31,7 @@
                     <button type="button" class="cancelbtn" onclick="location.href='index.php'">Cancel</button>
                 </div>
             </form>
-
+            
             <footer>
                 <p>All work copyright &copy; of Ben Flemming, Zak Edwards, Evan Crabtree, Declan Eagle 2020</p>
             </footer>

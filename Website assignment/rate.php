@@ -48,9 +48,10 @@
                     <input type="hidden" name="act" value="run">
                     <input type="submit" value="Submit" class="input">
                 </form>
-
-
             </form>
+            <div class=container>
+                <button class="cancelbtn" type="submit" onclick="location.href='index.php' ">Back</button>
+            </div>
             <footer>
                 <p>All work copyright &copy; of Ben Flemming, Zak Edwards, Evan Crabtree, Declan Eagle 2020</p>
             </footer>
