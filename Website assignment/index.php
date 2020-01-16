@@ -84,7 +84,7 @@
     if(isset($_POST['search'])) {
         $searchq = $_POST['search'];
         //Setting allowed characters, only numbers, letters and a small set of punctuation
-        $searchq = preg_replace("#[^0-9 a-z . _ ]#i","",$searchq);
+        $searchq = preg_replace("#[^0-9 a-z . _ / ]#i","",$searchq);
 
         //SQL query, comparing search string to column data
         $query = mysqli_query($connect, "SELECT * FROM documents WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (Name LIKE '%$searchq%' OR ID LIKE '%$searchq%' OR Location LIKE '%$searchq%' OR LastModified LIKE '%$searchq%' OR Author LIKE '%$searchq%')") or die ("Could not search.");
