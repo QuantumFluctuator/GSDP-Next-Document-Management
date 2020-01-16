@@ -37,11 +37,34 @@
                             echo "<br>New tag added successfully";
                         }
                     }
+
+
+                    if (!empty($_GET['del'])) 
+                    {
+                        $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+                        if (!$connect) {
+                            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                            die(mysqli_error());
+                        }
+                        $delid= $_GET['DocID']; // saves description enterd 
+                        $deltagid= $_GET['TagID'];
+                        $insert = mysqli_query($connect, "DELETE FROM TagLink WHERE (ID=$delid AND TagID=$deltagid)");
+                        if ($connect->query($insert) === TRUE) {
+                            echo "<br>New tag added successfully";
+                        }
+                    }
+
+
                     ?>
 
                     <form action="changetags.php" method="get">
                         <input type="hidden" name="act" value="run">
                         <input type="submit" value="Submit" class="input">
+                    </form>
+
+                     <form action="changetags.php" method="get">
+                        <input type="hidden" name="del" value="run">
+                        <input type="submit" value="Delete" class="input">
                     </form>
 
                 </form>
