@@ -34,8 +34,8 @@
         $i = 0;
 
         mysqli_query($connect, "DELETE FROM Rating");
-        mysqli_query($connect, "DELETE FROM documents");
         mysqli_query($connect, "DELETE FROM TagLink");
+        mysqli_query($connect, "DELETE FROM documents");
 
 
         while ($i < count($results)) {
