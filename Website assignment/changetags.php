@@ -14,36 +14,37 @@
                 </div>
             </header>
 
+            <div class="bordered">
+                <form>
+                    <legend><h3>Edit Tags</h3></legend>
+                    <label>Enter a document ID:</label>
+                    <input type="text" name="DocID"/>
+                    <label>Add a new tag ID:</label>
+                    <input type="text" name="TagID"/>
 
-            <form>
-                <legend><h3>Edit Tags</h3></legend>
-                <label>Enter a document ID:</label>
-                <input type="text" name="DocID"/>
-                <label>Add a new tag ID:</label>
-                <input type="text" name="TagID"/>
-
-                <?php
-                if (!empty($_GET['act'])) 
-                {
-                    $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
-                    if (!$connect) {
-                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                        die(mysqli_error());
+                    <?php
+                    if (!empty($_GET['act'])) 
+                    {
+                        $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+                        if (!$connect) {
+                            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                            die(mysqli_error());
+                        }
+                        $id= $_GET['DocID']; // saves description enterd 
+                        $tagid= $_GET['TagID'];
+                        $insert = mysqli_query($connect, "INSERT INTO TagLink (ID, TagID) VALUES ($id, $tagid)");
+                        if ($connect->query($insert) === TRUE) {
+                            echo "<br>New tag added successfully";
+                        }
                     }
-                    $id= $_GET['DocID']; // saves description enterd 
-                    $tagid= $_GET['TagID'];
-                    $insert = mysqli_query($connect, "INSERT INTO TagLink (ID, TagID) VALUES ($id, $tagid)");
-                    if ($connect->query($insert) === TRUE) {
-                        echo "<br>New tag added successfully";
-                    }
-                }
-                ?>
+                    ?>
 
-                <form action="changetags.php" method="get">
-                    <input type="hidden" name="act" value="run">
-                    <input type="submit" value="Submit" class="input">
+                    <form action="changetags.php" method="get">
+                        <input type="hidden" name="act" value="run">
+                        <input type="submit" value="Submit" class="input">
+                    </form>
+
                 </form>
-
                 <table>
                     <thead>
                         <tr>
@@ -64,7 +65,7 @@
                         ?>
                     </tbody>
                 </table>
-            </form>
+            </div>
             <footer>
                 <p>All work copyright &copy; of Ben Flemming, Zak Edwards, Evan Crabtree, Declan Eagle 2020</p>
             </footer>

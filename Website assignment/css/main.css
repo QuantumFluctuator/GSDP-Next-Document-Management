@@ -241,6 +241,9 @@ mark {
 }
 
 form {
-    border: 2px solid black;
     padding: 8px;
+}
+
+.bordered {
+    border: 2px solid black;
 }

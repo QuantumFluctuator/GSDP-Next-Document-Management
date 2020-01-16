@@ -13,7 +13,7 @@
                     <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>
                 </div>
             </header>
-            <form>
+            <form class="bordered">
                 <legend><h3>Add Rating</h3></legend>
                 <label>Enter a document ID:</label>
                 <input type="text" name="DocID"/>

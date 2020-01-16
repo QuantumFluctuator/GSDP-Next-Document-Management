@@ -68,7 +68,7 @@
         ?>
         <hr size="6" width="75%" align="center" color="black">
         <h2>Search Results</h2>
-        <table>
+        <table class="bordered">
             <thead>
                 <tr>
                     <td>Document ID</td>
@@ -126,7 +126,7 @@
         ?>
         <hr size="6" width="75%" align="center" color="black">
         <h2>All Documents</h2>
-        <table>
+        <table class="bordered">
             <thead>
                 <tr>
                     <td>Document ID</td>
