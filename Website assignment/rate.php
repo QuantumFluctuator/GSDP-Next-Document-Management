@@ -9,8 +9,10 @@
     <body>
         <div id="container">
             <header>
-                <div id="logo">
-                    <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>
+                <div class="container">
+                    <div id="logo">
+                        <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>
+                    </div>
                 </div>
             </header>
             <form>

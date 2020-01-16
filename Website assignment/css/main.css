@@ -9,11 +9,6 @@ h1, h2{
     font-family: 'Roboto', sans-serif;
 }
 
-/*opacity of front page image*/
-img{
-    opacity: 0.9;	
-}
-
 /*navigation menu container*/
 .container{
     width:100%;	
@@ -114,10 +109,10 @@ dt{
 dt:first-child{
     border-top:none;
 }
-
 dd{
     padding:0 0 20px 0;
 }
+
 /* Additional form styles*/
 label{
     display:inline-block;
@@ -133,6 +128,7 @@ input[type=text], input[type=email], input[type=tel]{
     font-family: Roboto, Arial, sans-serif;		
     align-content: center;
 }
+
 textarea{
     width:400px;
     padding:5px;
@@ -145,19 +141,6 @@ footer{
     font-size:0.75em;
     text-align:center;
     font-style:italic;
-}
-
-/*Custom sized font to improve the look of the ideas page*/
-.ideasHeader{
-    font-size: 14px;
-}
-
-/*aligning the video on the video-work page properly*/
-.contactPlacement{
-    align-content: center;
-    padding-top:50px;
-
-    display: inline-block;
 }
 
 /*centering image on the front page*/
@@ -212,35 +195,13 @@ button:hover {
     background-color: #f44336;
 }
 
-/* Center the avatar image inside this container */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-}
-
-/* Avatar image */
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-
 /* Add padding to containers */
 .container {
     padding: 16px;
 }
 
-/* The "Forgot password" text */
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
+/* Change styles for cancel button on extra small screens */
 @media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
     .cancelbtn {
         width: 100%;
     }
