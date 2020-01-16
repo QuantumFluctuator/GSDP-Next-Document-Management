@@ -87,7 +87,8 @@ section{
 }
 
 table{
-    width:1200px;
+    width: 100%;
+    max-width:1200px;
 }
 th, td{
     padding:10px 4px;
