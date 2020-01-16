@@ -4,7 +4,7 @@ session_start();
 // connect to database
 $db = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
 
-mysqli_query($connect, "SELECT * FROM users WHERE ";
+mysqli_query($connect, "SELECT * FROM users WHERE 1");
 
 // variable declaration
 $username = "";
@@ -14,7 +14,7 @@ $errors   = array();
 // return user array from their id
 function getUserById($id){
 	global $db;
-	$query = "SELECT * FROM users WHERE id=" . $id;
+	$query = "SELECT * FROM users WHERE UserID=" . $id;
 	$result = mysqli_query($db, $query);
 
 	$user = mysqli_fetch_assoc($result);
@@ -73,7 +73,7 @@ function login(){
 	if (count($errors) == 0) {
 		$password = md5($password);
 
-		$query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
+		$query = "SELECT * FROM users WHERE Username='$username' AND Password='$password' LIMIT 1";
 		$results = mysqli_query($db, $query);
 
 		if (mysqli_num_rows($results) == 1) { // user found
@@ -121,7 +121,7 @@ function login(){
 	if (count($errors) == 0) {
 		$password = md5($password);
 
-		$query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
+		$query = "SELECT * FROM users WHERE Username='$username' AND Password='$password' LIMIT 1";
 		$results = mysqli_query($db, $query);
 
 		if (mysqli_num_rows($results) == 1) { // user found

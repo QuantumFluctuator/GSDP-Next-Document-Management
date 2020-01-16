@@ -1,4 +1,4 @@
-<?php include('functions.php') ?>
+<!--<?php //include('functions.php') ?>-->
 <!doctype html>
 <html>
     <head>
@@ -15,7 +15,7 @@
             </header>
 
             <form method="post" action="login.php">
-                <?php echo display_error(); ?>
+                <?php //echo display_error(); ?>
 
                 <div class="input-group">
                     <label for="uname"><b>Username</b></label>

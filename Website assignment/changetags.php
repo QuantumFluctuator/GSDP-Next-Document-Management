@@ -140,7 +140,7 @@
                     ?>
                     <form action="changetags.php" method="get">
                         <input type="hidden" name="del" value="run">
-                        <input type="submit" value="Delete" class="input">
+                        <input class="adminbutton" type="submit" value="Delete" class="input">
                     </form>
 
                 </form>
