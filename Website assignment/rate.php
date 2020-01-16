@@ -42,30 +42,27 @@
                         if($id > $MaxID){
                             echo "Enter a ID Below".($MaxID);
                         }
-                        if($rating  < 0 ) || ($rating > 5){
+                        if (($rating  < 0 ) || ($rating > 5)) {
                             echo "Enter a value between 1 and 5";
                         }
                         while(($rating  > 0 ) || ($rating < 6) && ($id <= $MaxID)){
-                            //$insert = mysqli_query($connect, "INSERT INTO TagLink (ID, TagID) VALUES ($id, $tagid)");
                             // Need to add user when login is added 
                             $insert = mysqli_query($connect,"INSERT INTO Rating (RatingValue, DocumentID) VALUES ($rating, $id)");
                             if ($connect->query($insert) === TRUE) {
                                 echo "<br>New Rating added successfully";
                             }
                             else{
-                                echo "<br>Rating coundnt be added"
+                                echo "<br>Rating coundnt be added";
 
                             }
                         }
-                    }  
-
+                    }
                     ?>
 
                     <form action="rate.php" method="get">
                         <input type="hidden" name="act" value="run">
                         <input type="submit" value="Submit">
                     </form>
-                    }
 
                 </fieldset>
             </form>
