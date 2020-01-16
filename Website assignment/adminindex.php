@@ -18,7 +18,7 @@
         <div class=container>
             <header>
                 <div id="logo">
-                    <h1><a href="index.php">NEXT DOCUMENT MANAGER</a></h1>
+                    <h1><a href="adminindex.php">NEXT DOCUMENT MANAGER</a></h1>
                 </div>
             </header>
 
@@ -42,7 +42,7 @@
         </div>
 
         <div class="topnav">
-            <form action="index.php" method="post" align="center">
+            <form action="adminindex.php" method="post" align="center">
                 <input type="text" name="search" placeholder="Search" />
                 <input type="submit" value="Go" />
             </form>
@@ -115,7 +115,10 @@
                     }
                         ?>
                     </td>
-                    <td></td>
+                    <td><button type='submit' onclick="location.href='approvalpage.php?approveID=<?php echo $row['ID'] ?>'">Approve Document</button></td>
+                    <?php
+                    $id = $row['ID'];
+                    ?>
                 </tr>
                 <?php
                 }
