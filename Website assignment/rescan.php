@@ -44,9 +44,7 @@
             $author = str_replace("0", "Unknown", fileowner("Documents/" . $results[$i]));
             $last = date("Y-m-d", filemtime("Documents/" . $results[$i]));
 
-            $id = $i;
-
-            $insert = mysqli_query($connect, "INSERT INTO documents (ID, Name, Author, LastModified, Location, Approved) VALUES ($id, '$name', '$author', '$last', '$loc', FALSE)");
+            $insert = mysqli_query($connect, "INSERT INTO documents (Name, Author, LastModified, Location, Approved) VALUES ('$name', '$author', '$last', '$loc', FALSE)");
 
             echo $sql . "<br>" . $connect->error;
 
