@@ -30,7 +30,7 @@
                 $searchq = preg_replace("#[^0-9 a-z . _ ]#i","",$searchq);
 
                 //SQL query, comparing search string to column data
-                $query = mysqli_query($connect, "SELECT * FROM documents d INNER JOIN TagLink l ON d.ID=l.ID INNER JOIN Tag t ON t.TagID=l.TagID WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (l.TagName LIKE '%$searchq%')") or die ("Could not search.");
+                $query = mysqli_query($connect, "SELECT DISTINCT * FROM documents d INNER JOIN TagLink l ON d.ID=l.ID INNER JOIN Tag t ON t.TagID=l.TagID WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (t.TagName LIKE '%$searchq%')") or die ("Could not search.");
 
                 $count = mysqli_num_rows($query);
 
@@ -61,17 +61,17 @@
                     while($row = mysqli_fetch_assoc($query)){
                     ?>
                     <tr>
-                        <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['ID'])?></td>
-                        <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name']) . "</a>"?></td>
-                        <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Location'])?></td>
-                        <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['LastModified'])?></td>
-                        <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Author'])?></td>
+                        <td><?php echo $row['ID']?></td>
+                        <td><?php echo "<a href=Documents/" . $row['Name'] . " download>" . $row['Name'] . "</a>"?></td>
+                        <td><?php echo $row['Location']?></td>
+                        <td><?php echo $row['LastModified']?></td>
+                        <td><?php echo $row['Author']?></td>
                         <td>
                         <?php
                         $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
 
                         while ($row1 = mysqli_fetch_assoc($tags)) {
-                            echo $row1['TagName'] . "<br>";
+                            echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row1['TagName'] . "<br>");
                         }
                         ?>
                         </td>
