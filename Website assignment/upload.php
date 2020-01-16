@@ -16,8 +16,7 @@
 
             <form action="#file" method='post' enctype="multipart/form-data">
                 Filepath: <input type="text" name="path"/>
-                Filepath: <input type="text" name="date"/>
-                Filepath: <input type="text" name="author"/>
+                Author: <input type="text" name="author"/>
                 <input type="file" name="file">
                 <input type="submit" name="submit" value="Upload" class="input">
 
@@ -32,10 +31,8 @@
                     $fileextension= substr($name, $position + 1);
                     $fileextension= strtolower($fileextension);
                     $path= $_POST['path']; // saves path entered
-                    $date= $_POST['date']; // saves date entered
                     $author= $_POST['author']; // saves author entered
                     $connect = mysqli_connect("localhost", "next", "nextTeam2", "nextDocumentManager");
-
                     if (!$connect) {
                         echo "Failed to connect";
                     }
@@ -50,13 +47,12 @@
                         }
                     }
                 }
-
                 if(!empty($path))
                 {
                     $file_pointer = $path;
-
                     $path = str_replace("Documents/", "", $path);
-                    $insert = "INSERT INTO documents (Name, Location, LastModified, Author, Approved) VALUES ('$name', '$path', $date, $author, FALSE)";
+                    $date = date("Y-m-d");
+                    $insert = "INSERT INTO documents (Name, Location, LastModified, Author, Approved) VALUES ('$name', '$path', '$date', '$author', FALSE)";
                     //$sql = mysqli_query($connection,"INSERT INTO documents (Name, Location, Approved) VALUES ('$name', '$path', FALSE)");
                     if ($connect->query($insert) === TRUE) {
                         echo "<br>New record created successfully";

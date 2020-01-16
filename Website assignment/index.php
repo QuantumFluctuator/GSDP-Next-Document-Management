@@ -27,55 +27,19 @@
                 <button type="submit" onclick="location.href='login.php' ">Sign in</button>
 
                 <div class = "upload">
-                     <!--Select file to upload !-->
-                     <form action="upload.php" method="post" enctype="multipart/form-data">
-                         <button type="file" name="fileToUpload" id="fileToUpload"> Upload Document </button>
+                    <!--Select file to upload !-->
+                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                        <button onclick="location.href='upload.php'" name="fileToUpload" id="fileToUpload"> Upload Document </button>
                     </form>
                 </div>
-                
-                <!-- TODO: NEED NEW BUTTONS HERE FOR CHANGING TAGS AND RATING A FILE -->
 
-                <div class = "changeButtons">
-                     <!--Select file to upload !-->
-                     
-                         <button type="submit" onclick="location.href='changetags.php'""> Change/Add Tags </button>
-                         <button type="submit" onclick="location.href='rate.php'""> Rate File </button>
+                <!-- BUTTONS FOR CHANGING TAGS AND RATING A FILE -->
 
-                </div>
+                <button name="rateButton" type="submit" onclick="location.href='rate.php' ">Rate File</button>
+                <button name="changeButton" type="submit" onclick="location.href='changetags.php' ">Search/Modify Tags</button>
 
             </div>
         </div>
-
-        <!--LOGGED IN USER TAB -->
-
-        <div class="content">
-        <!-- notification message -->
-        <?php if (isset($_SESSION['success'])) : ?>
-            <div class="error success" >
-                <h3>
-                    <?php 
-                        echo $_SESSION['success']; 
-                        unset($_SESSION['success']);
-                    ?>
-                </h3>
-            </div>
-        <?php endif ?>
-        <!-- logged in user information -->
-        <div class="profile_info">
-            <div>
-                <?php  if (isset($_SESSION['user'])) : ?>
-                    <strong><?php echo $_SESSION['user']['username']; ?></strong>
-
-                    <small>
-                        <i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
-                        <br>
-                        <a href="index.php?logout='1'" style="color: red;">logout</a>
-                    </small>
-
-                <?php endif ?>
-            </div>
-        </div>
-    </div>
 
         <div class="topnav">
             <form action="index.php" method="post" align="center">
@@ -104,7 +68,7 @@
         ?>
         <hr size="6" width="75%" align="center" color="black">
         <h2>Search Results</h2>
-        <table>
+        <table class="bordered">
             <thead>
                 <tr>
                     <td>Document ID</td>
@@ -130,16 +94,16 @@
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Location'])?></td>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['LastModified'])?></td>
                     <td>
-                    <?php
-                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Ratings WHERE Ratings.DocumentID = " . $row['ID']);
-                    echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
-                    ?>
+                        <?php
+                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Rating WHERE Rating.DocumentID = " . $row['ID']);
+                    echo round(mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'], 2);
+                        ?>
                     </td>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Author'])?></td>
                     <td><?php echo str_replace("1", "Yes", str_replace("0", "No", $row['Approved']))?></td>
                     <td>
                         <?php
-                    $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
+                            $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
                     /*if (!$results) {
                         $message  = 'Invalid query: ' . mysqli_error() . "\n";
                         die($message);
@@ -148,7 +112,7 @@
                     while ($row1 = mysqli_fetch_assoc($tags)) {
                         echo $row1['TagName'] . "<br>";
                     }
-                    ?>
+                        ?>
                     </td>
                 </tr>
                 <?php
@@ -162,7 +126,7 @@
         ?>
         <hr size="6" width="75%" align="center" color="black">
         <h2>All Documents</h2>
-        <table>
+        <table class="bordered">
             <thead>
                 <tr>
                     <td>Document ID</td>
@@ -193,14 +157,14 @@
                     <td><?php echo $row['LastModified']?></td>
                     <td>
                     <?php
-                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Ratings WHERE Ratings.DocumentID = " . $row['ID']);
-                    echo mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'];
+                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Rating WHERE Rating.DocumentID = " . $row['ID']);
+                    echo round(mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'], 2);
                     ?>
                     </td>
                     <td><?php echo $row['Author']?></td>
                     <td><?php echo str_replace("1", "Yes", str_replace("0", "No", $row['Approved']))?></td>
                     <td>
-                        <?php
+                    <?php
                     $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
                     if (!$results) {
                         $message  = 'Invalid query: ' . mysqli_error() . "\n";
@@ -220,11 +184,11 @@
         </table>
 
         <hr size="6" width="75%" align="center" color="black">
-        
+
         <div class=container>
-            <button class=adminbutton type="submit" onclick="location.href='rescan.php' ">ADMIN RESCAN</button>
+            
         </div>
-        
+
         <footer>
             <p>All work copyright &copy; of Ben Flemming, Zak Edwards, Evan Crabtree, Declan Eagle 2020</p>
         </footer>

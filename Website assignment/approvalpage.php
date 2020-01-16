@@ -7,8 +7,11 @@ if (!$connect) {
 }
 
 //Using POST
-$var_value = $_POST['approveID'];
+$var_value = $_GET['approveID'];
 
-$sql = "UPDATE documents SET Approved='Yes' WHERE ID='approveID'";
+
+$sql = "UPDATE documents SET Approved=TRUE WHERE ID=$var_value";
+mysqli_query($connect, $sql);
+
 header("Location: adminindex.php");
 ?>
