@@ -247,3 +247,8 @@ form {
 .bordered {
     border: 2px solid black;
 }
+
+input[name="deleteBTN"]
+{
+    background-color: #FF0000;
+}
