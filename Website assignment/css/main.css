@@ -11,14 +11,13 @@ h1, h2{
 
 /*navigation menu container*/
 .container{
-    width:100%;	
     margin:auto;
     max-width: 1200px;
     min-width: 600px;
-    /*when browser in windowed mode, prevents blending directly with side of window
-    padding-left: 10px;*/
+    /*when browser in windowed mode, prevents blending directly with side of window*/
     background-color: #BBBBBB;
     padding: 16px;
+    border: 2px solid black;
 }
 
 /*header with name and page links */
