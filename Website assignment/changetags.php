@@ -30,44 +30,49 @@
                             echo "Failed to connect to MySQL: " . mysqli_connect_error();
                             die(mysqli_error());
                         }
-                        $id= $_GET['DocID']; // saves description enterd 
+                        $id= $_GET['DocID']; // saves description entered 
                         $tagid= $_GET['TagID'];
                         $insert = mysqli_query($connect, "INSERT INTO TagLink (ID, TagID) VALUES ($id, $tagid)");
                         if ($connect->query($insert) === TRUE) {
                             echo "<br>New tag added successfully";
                         }
                     }
-
-
-                    if (!empty($_GET['del'])) 
-                    {
-                        $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
-                        if (!$connect) {
-                            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                            die(mysqli_error());
-                        }
-                        $delid= $_GET['DocID']; // saves description enterd 
-                        $deltagid= $_GET['TagID'];
-                        $insert = mysqli_query($connect, "DELETE FROM TagLink WHERE (ID=$delid AND TagID=$deltagid)");
-                        if ($connect->query($insert) === TRUE) {
-                            echo "<br>New tag added successfully";
-                        }
-                    }
-
-
                     ?>
 
                     <form action="changetags.php" method="get">
                         <input type="hidden" name="act" value="run">
                         <input type="submit" value="Submit" class="input">
                     </form>
+                </form>
+                <form>
+                    <legend><h3>Delete Tags</h3></legend>
+                    <label>Enter a document ID:</label>
+                    <input type="text" name="DelDocID"/>
+                    <label>Add a new tag ID:</label>
+                    <input type="text" name="DelTagID"/>
 
-                     <form action="changetags.php" method="get">
+                    <?php
+                    if (!empty($_GET['del'])) {
+                        $connect = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
+                        if (!$connect) {
+                            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                            die(mysqli_error());
+                        }
+                        $id= $_GET['DelDocID']; // saves description entered
+                        $tagid= $_GET['DelTagID'];
+                        $insert = mysqli_query($connect, "DELETE FROM TagLink WHERE (ID=$id AND TagID=$tagid)");
+                        if ($connect->query($insert) === TRUE) {
+                            echo "<br>Tag removed successfully";
+                        }
+                    }
+                    ?>
+                    <form action="changetags.php" method="get">
                         <input type="hidden" name="del" value="run">
                         <input type="submit" value="Delete" class="input">
                     </form>
 
                 </form>
+                
                 <table>
                     <thead>
                         <tr>

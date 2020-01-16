@@ -46,7 +46,7 @@
 
             $insert = mysqli_query($connect, "INSERT INTO documents (Name, Author, LastModified, Location, Approved) VALUES ('$name', '$author', '$last', '$loc', FALSE)");
 
-            echo $sql . "<br>" . $connect->error;
+            echo "<br>" . $connect->error;
 
             $i++;
         }
