@@ -46,22 +46,15 @@
                             echo "Enter a value between 1 and 5";
                         }
                         if (($rating  > 0 ) || ($rating < 6) && ($id <= $MaxID)){
-                            // Need to add user when login is added 
+                            // TODO: Need to add user when login is added 
                             $insert = mysqli_query($connect,"INSERT INTO Rating (RatingValue, DocumentID) VALUES ($rating, $id)");
-                            if ($connect->query($insert) === TRUE) {
-                                echo "<br>New Rating added successfully";
-                            }
-                            else{
-                                echo "<br>Rating coundnt be added";
-
-                            }
                         }
                     }
                     ?>
 
                     <form action="rate.php" method="get">
                         <input type="hidden" name="act" value="run">
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Submit" class="input">
                     </form>
 
                 </fieldset>

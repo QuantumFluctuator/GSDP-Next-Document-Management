@@ -17,7 +17,7 @@
             <form action="#file" method='post' enctype="multipart/form-data">
                 Filepath: <input type="text" name="path"/>
                 <input type="file" name="file">
-                <input type="submit" name="submit" value="Upload">
+                <input type="submit" name="submit" value="Upload" class="input">
 
 
                 <?php

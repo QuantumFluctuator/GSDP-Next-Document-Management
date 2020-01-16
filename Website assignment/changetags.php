@@ -44,34 +44,72 @@
                         if ($connect->query($insert) === TRUE) {
                             echo "<br>New tag added successfully";
                         }
-                    } else {
+                    }
                     ?>
 
                     <form action="changetags.php" method="get">
                         <input type="hidden" name="act" value="run">
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Submit" class="input">
                     </form>
 
-                    <?php
-                    }
-                    ?>
-
-                    <p><label>Tag ID:</label></p>
-                    <p><label>1 Support</label></p>
-                    <p><label>2 Architectural</label></p>
-                    <p><label>3 User</label></p>
-                    <p><label>4 Analysis</label></p>
-                    <p><label>5 Design</label></p>
-                    <p><label>6 Testing</label></p>
-                    <p><label>7 Results</label></p>
-                    <p><label>8 Framework</label></p>
-                    <p><label>9 Planning</label></p>
-                    <p><label>10 .docx</label></p>
-                    <p><label>11 .doc</label></p>
-                    <p><label>12 .txt</label></p>
-
-
-
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Support</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Architectural</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>User</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Analysis</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Design</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Testing</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Results</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Framework</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Planning</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>.docx</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>.doc</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>.txt</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </fieldset>
             </form>
             <footer>
