@@ -2,6 +2,7 @@
 session_start();
 
 // connect to database
+global $db, $username, $errors;
 $db = mysqli_connect("localhost","next", "nextTeam2","nextDocumentManager");
 
 mysqli_query($connect, "SELECT * FROM users WHERE 1");
@@ -13,7 +14,6 @@ $errors   = array();
 
 // return user array from their id
 function getUserById($id){
-	global $db;
 	$query = "SELECT * FROM users WHERE UserID=" . $id;
 	$result = mysqli_query($db, $query);
 
@@ -23,12 +23,10 @@ function getUserById($id){
 
 // escape string
 function e($val){
-	global $db;
 	return mysqli_real_escape_string($db, trim($val));
 }
 
 function display_error() {
-	global $errors;
 
 	if (count($errors) > 0){
 		echo '<div class="error">';
@@ -55,8 +53,6 @@ if (isset($_POST['login_btn'])) {
 
 // LOGIN USER
 function login(){
-	global $db, $username, $errors;
-
 	// grap form values
 	$username = e($_POST['username']);
 	$password = e($_POST['password']);
@@ -71,8 +67,6 @@ function login(){
 
 	// attempt login if no errors on form
 	if (count($errors) == 0) {
-		$password = md5($password);
-
 		$query = "SELECT * FROM users WHERE Username='$username' AND Password='$password' LIMIT 1";
 		$results = mysqli_query($db, $query);
 
@@ -103,8 +97,6 @@ if (isset($_POST['login_btn'])) {
 
 // LOGIN USER
 function login(){
-	global $db, $username, $errors;
-
 	// grap form values
 	$username = e($_POST['username']);
 	$password = e($_POST['password']);
@@ -119,8 +111,6 @@ function login(){
 
 	// attempt login if no errors on form
 	if (count($errors) == 0) {
-		$password = md5($password);
-
 		$query = "SELECT * FROM users WHERE Username='$username' AND Password='$password' LIMIT 1";
 		$results = mysqli_query($db, $query);
 

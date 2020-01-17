@@ -84,7 +84,7 @@
     if(isset($_POST['search'])) {
         $searchq = $_POST['search'];
         //Setting allowed characters, only numbers, letters and a small set of punctuation
-        $searchq = preg_replace("#[^0-9 a-z . _ / ]#i","",$searchq);
+        $searchq = preg_replace("#[^0-9 a-z . _ / - ]#i","",$searchq);
 
         //SQL query, comparing search string to column data
         $query = mysqli_query($connect, "SELECT * FROM documents WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (Name LIKE '%$searchq%' OR ID LIKE '%$searchq%' OR Location LIKE '%$searchq%' OR LastModified LIKE '%$searchq%' OR Author LIKE '%$searchq%')") or die ("Could not search.");
@@ -121,12 +121,22 @@
                 ?>
                 <tr>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['ID'])?></td>
+                    <?php
+                    if ($row['Approved']) {
+                    ?>
                     <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name']) . "</a>"?></td>
+                    <?php
+                    } else {
+                    ?>
+                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name'])?></td>
+                    <?php
+                    }
+                    ?>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Location'])?></td>
                     <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['LastModified'])?></td>
                     <td>
                         <?php
-                    $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Rating WHERE Rating.DocumentID = " . $row['ID']);
+                        $avgrating = mysqli_query($connect, "SELECT AVG(RatingValue) FROM Rating WHERE Rating.DocumentID = " . $row['ID']);
                 echo round(mysqli_fetch_assoc($avgrating)['AVG(RatingValue)'], 2);
                         ?>
                     </td>
@@ -183,7 +193,17 @@
                 ?>
                 <tr>
                     <td><?php echo $row['ID']?></td>
-                    <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_replace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
+                    <?php
+                    if ($row['Approved']) {
+                    ?>
+                    <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name']) . "</a>"?></td>
+                    <?php
+                    } else {
+                    ?>
+                    <td><?php echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name'])?></td>
+                    <?php
+                    }
+                    ?>
                     <td><?php echo $row['Location']?></td>
                     <td><?php echo $row['LastModified']?></td>
                     <td>

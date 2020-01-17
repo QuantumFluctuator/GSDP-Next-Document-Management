@@ -120,7 +120,7 @@
                     <legend><h3>Delete Tags</h3></legend>
                     <label>Enter a document ID:</label>
                     <input type="text" name="DelDocID"/>
-                    <label>Add a new tag ID:</label>
+                    <label>Tag ID to remove:</label>
                     <input type="text" name="DelTagID"/>
 
                     <?php

@@ -14,7 +14,6 @@
                     $results[] = str_replace("/var/www/html/DocumentManager/Documents/", "", $path);
                 } else if($value != "." && $value != "..") {
                     getDirContents($path, $results);
-                    //$results[] = str_replace("/var/www/html/DocumentManager/Documents/", "", $path);
                 }
             }
 

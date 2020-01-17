@@ -53,7 +53,7 @@
         if(isset($_POST['search'])) {
             $searchq = $_POST['search'];
             //Setting allowed characters, only numbers, letters and a small set of punctuation
-            $searchq = preg_replace("#[^0-9 a-z . _ ]#i","",$searchq);
+            $searchq = preg_replace("#[^0-9 a-z . _ / - ]#i","",$searchq);
 
             //SQL query, comparing search string to column data
             $query = mysqli_query($connect, "SELECT * FROM documents WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (Name LIKE '%$searchq%' OR ID LIKE '%$searchq%' OR Location LIKE '%$searchq%' OR LastModified LIKE '%$searchq%' OR Author LIKE '%$searchq%')") or die ("Could not search.");
@@ -105,17 +105,21 @@
                     <td>
                         <?php
                             $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
-                    /*if (!$results) {
-                        $message  = 'Invalid query: ' . mysqli_error() . "\n";
-                        die($message);
-                    }*/
 
                     while ($row1 = mysqli_fetch_assoc($tags)) {
                         echo $row1['TagName'] . "<br>";
                     }
                         ?>
                     </td>
-                    <td><button type='submit' onclick="location.href='approvalpage.php?approveID=<?php echo $row['ID'] ?>'">Approve Document</button></td>
+                    <td>
+                        <?php
+                    if (!$row['Approved']) {
+                        ?>
+                        <button type='submit' onclick="location.href='approvalpage.php?approveID=<?php echo $row['ID'] ?>'">Approve Document</button>
+                        <?php
+                    }
+                        ?>
+                    </td>
                     <?php
                     $id = $row['ID'];
                     ?>
@@ -182,7 +186,15 @@
                     }
                         ?>
                     </td>
-                    <td><button type='submit' onclick="location.href='approvalpage.php?approveID=<?php echo $row['ID'] ?>'">Approve Document</button></td>
+                    <td>
+                        <?php
+                    if (!$row['Approved']) {
+                        ?>
+                        <button type='submit' onclick="location.href='approvalpage.php?approveID=<?php echo $row['ID'] ?>'">Approve Document</button>
+                        <?php
+                    }
+                        ?>
+                    </td>
                     <?php
                     $id = $row['ID'];
                     ?>
