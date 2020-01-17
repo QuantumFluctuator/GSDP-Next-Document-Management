@@ -87,7 +87,7 @@
         $searchq = preg_replace("#[^0-9 a-z . _ / - ]#i","",$searchq);
 
         //SQL query, comparing search string to column data
-        $query = mysqli_query($connect, "SELECT DISTINCT * FROM documents d INNER JOIN TagLink l ON d.ID=l.ID INNER JOIN Tag t ON t.TagID=l.TagID WHERE (d.Name LIKE '%.doc' OR d.Name LIKE '%.docx' OR d.Name LIKE '%.txt') AND (d.Name LIKE '%$searchq%' OR d.ID LIKE '%$searchq%' OR d.Location LIKE '%$searchq%' OR d.LastModified LIKE '%$searchq%' OR d.Author LIKE '%$searchq%' OR t.TagName LIKE '%$searchq%')") or die ("Could not search.");
+        $query = mysqli_query($connect, "SELECT DISTINCT d.ID, d.Name, d.Location, d.LastModified, d.Author, d.Approved FROM documents d LEFT OUTER JOIN TagLink l ON d.ID=l.ID LEFT OUTER JOIN Tag t ON t.TagID=l.TagID WHERE (d.Name LIKE '%.doc' OR d.Name LIKE '%.docx' OR d.Name LIKE '%.txt') AND (d.Name LIKE '%$searchq%' OR d.ID LIKE '%$searchq%' OR d.Location LIKE '%$searchq%' OR d.LastModified LIKE '%$searchq%' OR d.Author LIKE '%$searchq%' OR t.TagName LIKE '%$searchq%')") or die ("Could not search.");
 
         $count = mysqli_num_rows($query);
 
@@ -191,7 +191,7 @@
                     <?php
                     if ($row['Approved']) {
                     ?>
-                    <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row['Name']) . "</a>"?></td>
+                    <td><?php echo "<a href=Documents/" . str_replace(' ', '%20', $row['Location']) . str_ireplace(' ', '%20', $row['Name']) . " download>" . $row['Name'] . "</a>"?></td>
                     <?php
                     } else {
                     ?>
