@@ -1,4 +1,4 @@
-<?php //include('functions.php') ?>
+<?php include('functions.php') ?>
 <!doctype html>
 <html>
     <head>
@@ -15,7 +15,7 @@
             </header>
 
             <form method="post" action="login.php">
-                <?php //echo display_error(); ?>
+                <?php echo display_error(); ?>
 
                 <div class="input-group">
                     <label for="uname"><b>Username</b></label>
@@ -24,11 +24,13 @@
                     <label for="psw"><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" name="psw" required>
 
-                    <button type="submit" onclick="location.href='index.php'">Login</button>
-                    <label  style="color:#FFFFFF">
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
+                    <div class="input-group">
+                        <button type="submit" class="btn" name="login_btn">Log in</button>
+                    </div>
+
                 </div>
+
+
 
                 <div class="container" style="background-color:#f1f1f1">
                     <button type="button" class="cancelbtn" onclick="location.href='index.php'">Cancel</button>
