@@ -51,7 +51,7 @@
         }
 
         $connect->close();
-        header("Location: index.php");
+        header("Location: adminindex.php");
         die();
         ?>
     </body>
