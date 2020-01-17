@@ -36,7 +36,7 @@
                 <!-- BUTTONS FOR CHANGING TAGS AND RATING A FILE -->
 
                 <button name="rateButton" type="submit" onclick="location.href='rate.php' ">Rate File</button>
-                <button name="changeButton" type="submit" onclick="location.href='changetags.php' ">Search/Modify Tags</button>
+                <button name="changeButton" type="submit" onclick="location.href='changetags.php' ">Add/Remove Tags</button>
 
                 <!--LOGGED IN USER TAB -->
 
@@ -87,7 +87,7 @@
         $searchq = preg_replace("#[^0-9 a-z . _ / - ]#i","",$searchq);
 
         //SQL query, comparing search string to column data
-        $query = mysqli_query($connect, "SELECT * FROM documents WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt') AND (Name LIKE '%$searchq%' OR ID LIKE '%$searchq%' OR Location LIKE '%$searchq%' OR LastModified LIKE '%$searchq%' OR Author LIKE '%$searchq%')") or die ("Could not search.");
+        $query = mysqli_query($connect, "SELECT DISTINCT * FROM documents d INNER JOIN TagLink l ON d.ID=l.ID INNER JOIN Tag t ON t.TagID=l.TagID WHERE (d.Name LIKE '%.doc' OR d.Name LIKE '%.docx' OR d.Name LIKE '%.txt') AND (d.Name LIKE '%$searchq%' OR d.ID LIKE '%$searchq%' OR d.Location LIKE '%$searchq%' OR d.LastModified LIKE '%$searchq%' OR d.Author LIKE '%$searchq%' OR t.TagName LIKE '%$searchq%')") or die ("Could not search.");
 
         $count = mysqli_num_rows($query);
 
@@ -145,14 +145,9 @@
                     <td>
                         <?php
                             $tags = mysqli_query($connect, "SELECT * FROM Tag JOIN TagLink ON Tag.TagID = TagLink.TagID WHERE TagLink.ID = " . $row['ID']);
-                /*if (!$results) {
-                        $message  = 'Invalid query: ' . mysqli_error() . "\n";
-                        die($message);
-                    }*/
-
                 while ($row1 = mysqli_fetch_assoc($tags)) {
-                    echo $row1['TagName'] . "<br>";
-                }
+                            echo str_ireplace($searchq, "<mark>" . $searchq . "</mark>", $row1['TagName'] . "<br>");
+                        }
                         ?>
                     </td>
                 </tr>
@@ -182,7 +177,7 @@
             </thead>
             <tbody>
                 <?php
-                $results = mysqli_query($connect, "SELECT * FROM documents WHERE Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt'") or die ("Could not search.");
+                $results = mysqli_query($connect, "SELECT * FROM documents WHERE (Name LIKE '%.doc' OR Name LIKE '%.docx' OR Name LIKE '%.txt')") or die ("Could not search.");
 
                 if (!$results) {
                     $message  = 'Invalid query: ' . mysqli_error() . "\n";
