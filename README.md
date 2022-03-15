@@ -1,7 +1,7 @@
 # GSDP Next Document Management
 Repository for document management software for next
 
-Can now be viewed fully working at [https://pi4.fluctuator.tk/](https://pi4.fluctuator.tk/)
+Can now be viewed fully working at [https://pi4.fluctuator.net/](https://pi4.fluctuator.net/)
 
 [https://trello.com/b/nuSkdOnm/sheffield-hallam-uni-document-management-project-team-2](https://trello.com/b/nuSkdOnm/sheffield-hallam-uni-document-management-project-team-2)
 
